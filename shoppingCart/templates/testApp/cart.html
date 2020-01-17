@@ -1,0 +1,69 @@
+{% extends "testApp/base.html"%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title></title>
+  </head>
+  <body>
+    {% block body_block %}
+    <div class="container" align="center">
+      <h1>Cart Information</h1><hr>
+      <table border="5">
+        <thead>
+          <th > PRODUCT ID </th>
+          <th> PRODUCT IMAGE </th>
+          <th> PRODUCT NAME </th>
+          <th> PRODUCT DETAIL </th>
+          <th> PRODUCT PRICE IN RUPEES </th>
+          <th> No. OF PRODUCT</th>
+          <th> SUB-TOTAL</th>
+          <!-- <th> QUANTITY</th>
+          <th> GRAND TOTAL</th> -->
+          <th> REMOVE TO CART </th>
+        </thead>
+        {% for cart in cart %}
+        <tr>
+          <td>{{cart.id}}</td>
+          <td><a><img alt="Image will be uploaded soon" src="{{cart.product.item_image.url}}" height="80px;"/></a></td>
+          <td>{{cart.product.item_name}}</td>
+          <td>{{cart.product.item_detail}}</td>
+          <td id="price">{{cart.product.item_price}}</td>
+          <td>
+          <input onchange="myFunction()" class="quantity" type="number" min="1" max="5"></td>
+          <td>
+            <div id="sub_total"></div>
+
+          </td>
+          <td><a href="/delete/{{cart.id}}" class="btn btn-primary">Remove To Cart</a></td>
+        </tr>
+        {% endfor %}
+      </table><hr>
+      <a href="/order" class="btn btn-primary btn-lg">Place Order</a></td><hr>
+      <p class="totals" id="grandtotal">Grand-total:</p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    $('#search-form .term').on('input', function(){
+      console.log('this actually works');
+    });
+    function myFunction() {
+      var x = $(".quantity").attr('value');
+
+      console.log('ttssst',x)
+    }
+    // $( document ).ready(function() {
+    //
+    //   $("#quantity").change(function() {
+    //       var price = parseFloat($('#price').text());
+    //       var quantity = parseFloat(document.getElementById('quantity').value);
+    //       var result = price*quantity;
+    //        $("#sub_total").text(result);
+    //   });
+    // });
+
+    </script>
+    {% endblock %}
+  </body>
+</html>
